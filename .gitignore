@@ -1,21 +1,45 @@
-# Python virtual environment
-venv/
-
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Django stuff:
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+pharmaflow/venv/
+
+# Packaging/build
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Django
 *.log
-*.pot
-*.pyc
-*.pyo
-*.db
-*.sqlite3
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
 
-# Environment variables
+# Env files / secrets
 .env
+.env.*
+!.env.example
 
-# VS Code settings
+# Test/cache/tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# IDE/editor
 .vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
