@@ -14,12 +14,13 @@
   <link rel="stylesheet" href="{% static 'pharmacy/css/style.css' %}"/>
   {% block extra_head %}{% endblock %}
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
 
-<div class="sidebar-overlay" id="sidebar-overlay"></div>
+{% block sidebar_overlay %}<div class="sidebar-overlay" id="sidebar-overlay"></div>{% endblock %}
 
 <div class="app-wrapper">
 
+  {% block sidebar_nav %}
   <!-- ══════════════════ SIDEBAR ══════════════════ -->
   <nav class="sidebar" id="sidebar">
 
@@ -82,6 +83,7 @@
       </div>
     </div>
   </nav>
+  {% endblock %}
 
   <!-- ══════════════════ MAIN ══════════════════ -->
   <div class="main-content">

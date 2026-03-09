@@ -184,6 +184,14 @@ h1, h2, h3, h4, h5 {
   min-height: 100vh;
 }
 
+.no-sidebar .main-content {
+  margin-left: 0;
+}
+
+.no-sidebar .btn-hamburger {
+  display: none;
+}
+
 /* ── Top Header ──────────────────────────────────────────────── */
 .top-header {
   height: var(--header-h);
