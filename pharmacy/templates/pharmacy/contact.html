@@ -10,12 +10,6 @@
         <h5><i class="bi bi-envelope me-2"></i>Send a Message</h5>
       </div>
       <div class="card-body">
-        {% if messages %}
-        {% for m in messages %}
-        <div class="alert alert-{{ m.tags }}"><i class="bi bi-check-circle me-2"></i>{{ m }}</div>
-        {% endfor %}
-        {% endif %}
-
         <form method="POST" novalidate>
           {% csrf_token %}
           {% if form.non_field_errors %}<div class="alert alert-danger">{{ form.non_field_errors }}</div>{% endif %}
