@@ -111,22 +111,32 @@ class Purchase(models.Model):
         return f"Purchase #{self.pk} – {self.medicine} ({self.quantity} units)"
 
     def save(self, *args, **kwargs):
-        """Auto-increase medicine stock on new purchase."""
+        """Keep medicine stock aligned when purchases are created or edited."""
         is_new = self.pk is None
-        if is_new:
-            old_qty = 0
-        else:
-            old_qty = Purchase.objects.get(pk=self.pk).quantity
+        old_qty = 0
+        old_medicine_id = None
+        if not is_new:
+            old_purchase = Purchase.objects.get(pk=self.pk)
+            old_qty = old_purchase.quantity
+            old_medicine_id = old_purchase.medicine_id
         super().save(*args, **kwargs)
         if is_new:
             Medicine.objects.filter(pk=self.medicine_id).update(
                 stock=models.F('stock') + self.quantity
             )
         else:
-            diff = self.quantity - old_qty
-            Medicine.objects.filter(pk=self.medicine_id).update(
-                stock=models.F('stock') + diff
-            )
+            if old_medicine_id != self.medicine_id:
+                Medicine.objects.filter(pk=old_medicine_id).update(
+                    stock=models.F('stock') - old_qty
+                )
+                Medicine.objects.filter(pk=self.medicine_id).update(
+                    stock=models.F('stock') + self.quantity
+                )
+            else:
+                diff = self.quantity - old_qty
+                Medicine.objects.filter(pk=self.medicine_id).update(
+                    stock=models.F('stock') + diff
+                )
 
 
 # ─── Sale (stock OUT) ─────────────────────────────────────────────────────────
@@ -146,21 +156,32 @@ class Sale(models.Model):
         return f"Sale #{self.pk} – {self.medicine} ({self.quantity} units)"
 
     def save(self, *args, **kwargs):
-        """Auto-decrease medicine stock on new sale."""
+        """Keep medicine stock aligned when sales are created or edited."""
         is_new = self.pk is None
         old_qty = 0
+        old_medicine_id = None
         if not is_new:
-            old_qty = Sale.objects.get(pk=self.pk).quantity
+            old_sale = Sale.objects.get(pk=self.pk)
+            old_qty = old_sale.quantity
+            old_medicine_id = old_sale.medicine_id
         super().save(*args, **kwargs)
         if is_new:
             Medicine.objects.filter(pk=self.medicine_id).update(
                 stock=models.F('stock') - self.quantity
             )
         else:
-            diff = self.quantity - old_qty
-            Medicine.objects.filter(pk=self.medicine_id).update(
-                stock=models.F('stock') - diff
-            )
+            if old_medicine_id != self.medicine_id:
+                Medicine.objects.filter(pk=old_medicine_id).update(
+                    stock=models.F('stock') + old_qty
+                )
+                Medicine.objects.filter(pk=self.medicine_id).update(
+                    stock=models.F('stock') - self.quantity
+                )
+            else:
+                diff = self.quantity - old_qty
+                Medicine.objects.filter(pk=self.medicine_id).update(
+                    stock=models.F('stock') - diff
+                )
 
 
 # ─── Contact Submission ───────────────────────────────────────────────────────

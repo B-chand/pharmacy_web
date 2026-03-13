@@ -33,11 +33,13 @@ urlpatterns = [
     # Purchases
     path('purchases/',                  views.purchase_list,   name='purchase_list'),
     path('purchases/add/',              views.purchase_add,    name='purchase_add'),
+    path('purchases/<int:pk>/edit/',    views.purchase_edit,   name='purchase_edit'),
     path('purchases/<int:pk>/delete/',  views.purchase_delete, name='purchase_delete'),
 
     # Sales
     path('sales/',                      views.sale_list,       name='sale_list'),
     path('sales/add/',                  views.sale_add,        name='sale_add'),
+    path('sales/<int:pk>/edit/',        views.sale_edit,       name='sale_edit'),
     path('sales/<int:pk>/delete/',      views.sale_delete,     name='sale_delete'),
 
     # Contact

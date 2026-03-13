@@ -35,6 +35,9 @@
           <td style="color:var(--slate);">{{ p.purchase_date }}</td>
           <td style="color:var(--muted); font-size:.82rem;">{{ p.notes|truncatechars:30|default:"—" }}</td>
           <td style="text-align:right;">
+            <a href="{% url 'purchase_edit' p.pk %}" class="action-btn action-edit" data-tooltip="Edit">
+              <i class="bi bi-pencil"></i>
+            </a>
             <a href="{% url 'purchase_delete' p.pk %}" class="action-btn action-delete" data-tooltip="Delete">
               <i class="bi bi-trash"></i>
             </a>

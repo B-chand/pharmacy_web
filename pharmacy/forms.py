@@ -124,10 +124,14 @@ class SaleForm(forms.ModelForm):
         cleaned = super().clean()
         medicine = cleaned.get('medicine')
         quantity = cleaned.get('quantity')
-        if medicine and quantity and quantity > medicine.stock:
-            raise forms.ValidationError(
-                f"Insufficient stock. Only {medicine.stock} units of '{medicine.name}' available."
-            )
+        if medicine and quantity:
+            available_stock = medicine.stock
+            if self.instance.pk and self.instance.medicine_id == medicine.pk:
+                available_stock += self.instance.quantity
+            if quantity > available_stock:
+                raise forms.ValidationError(
+                    f"Insufficient stock. Only {available_stock} units of '{medicine.name}' available."
+                )
         return cleaned
 
 

@@ -258,6 +258,22 @@ def purchase_add(request):
 
 
 @login_required
+def purchase_edit(request, pk):
+    purchase = get_object_or_404(Purchase, pk=pk)
+    form = PurchaseForm(request.POST or None, instance=purchase)
+    if request.method == 'POST' and form.is_valid():
+        updated_purchase = form.save()
+        messages.success(request, f"Purchase updated: {updated_purchase.quantity} × {updated_purchase.medicine}")
+        return redirect('purchase_list')
+    return render(request, 'pharmacy/purchase_form.html', {
+        'form': form,
+        'title': f'Edit Purchase #{purchase.pk}',
+        'action': 'Save Changes',
+        'purchase': purchase,
+    })
+
+
+@login_required
 def purchase_delete(request, pk):
     p = get_object_or_404(Purchase, pk=pk)
     if request.method == 'POST':
@@ -289,6 +305,22 @@ def sale_add(request):
         messages.success(request, f"Sale recorded: {s.quantity} × {s.medicine}")
         return redirect('sale_list')
     return render(request, 'pharmacy/sale_form.html', {'form': form, 'title': 'Record Sale', 'action': 'Record'})
+
+
+@login_required
+def sale_edit(request, pk):
+    sale = get_object_or_404(Sale, pk=pk)
+    form = SaleForm(request.POST or None, instance=sale)
+    if request.method == 'POST' and form.is_valid():
+        updated_sale = form.save()
+        messages.success(request, f"Sale updated: {updated_sale.quantity} × {updated_sale.medicine}")
+        return redirect('sale_list')
+    return render(request, 'pharmacy/sale_form.html', {
+        'form': form,
+        'title': f'Edit Sale #{sale.pk}',
+        'action': 'Save Changes',
+        'sale': sale,
+    })
 
 
 @login_required
