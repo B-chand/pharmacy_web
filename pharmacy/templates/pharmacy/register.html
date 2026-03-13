@@ -5,8 +5,22 @@
 {% block content %}
 <div class="container mt-5" style="max-width:500px;">
   <h2 class="mb-4 text-center">Create Account</h2>
+
+  {# Django messages (errors, success, info) #}
+  {% if messages %}
+  <div class="mb-3">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags|replace:"error","danger" }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
   <form method="POST">
     {% csrf_token %}
+    {# Render fields with Bootstrap spacing and HTML5 validation attributes #}
     {{ form.as_p }}
     <button type="submit" class="btn btn-teal w-100 mt-3">Create Account</button>
   </form>

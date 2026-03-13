@@ -3,51 +3,107 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 class RegisterForm(UserCreationForm):
+    """User registration form.
+
+    Extends Django's built-in UserCreationForm to include an email field
+    and Bootstrap-friendly widgets. Placeholders and HTML5 validation
+    attributes are included for a better UX.
+    """
+
     username = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'})
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Username',
+                'required': 'required',
+                'autofocus': 'autofocus',
+            }
+        )
     )
     email = forms.EmailField(
         required=True,
-        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'})
+        widget=forms.EmailInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Email',
+                'required': 'required',
+            }
+        )
     )
     password1 = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'})
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Password',
+                'required': 'required',
+            }
+        )
     )
     password2 = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirm Password'})
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Confirm Password',
+                'required': 'required',
+            }
+        )
     )
+
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
+
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Medicine, Supplier, Customer, Purchase, Sale, ContactSubmission
 
 # ── Shared widget helpers ─────────────────────────────────────────────────────
+
 def ctrl(placeholder='', type_='text', extra=''):
+    """Return a styled text input widget with optional placeholder."""
+
     attrs = {'class': 'form-control', 'placeholder': placeholder}
     if type_ != 'text':
         attrs['type'] = type_
     return forms.TextInput(attrs=attrs)
 
+
 def select():
+    """Return a styled select widget for dropdowns."""
+
     return forms.Select(attrs={'class': 'form-select'})
 
+
 def textarea(rows=3, placeholder=''):
+    """Return a styled textarea widget with a default row count."""
+
     return forms.Textarea(attrs={'class': 'form-control', 'rows': rows, 'placeholder': placeholder})
 
 
 # ── Auth ──────────────────────────────────────────────────────────────────────
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control form-control-lg',
-        'placeholder': 'Username',
-        'autofocus': True,
-    }))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form-control form-control-lg',
-        'placeholder': 'Password',
-    }))
+    """Login form with Bootstrap-friendly styling and HTML5 validation."""
+
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control form-control-lg',
+                'placeholder': 'Username',
+                'required': 'required',
+                'autofocus': True,
+            }
+        )
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control form-control-lg',
+                'placeholder': 'Password',
+                'required': 'required',
+            }
+        )
+    )
 
 
 # ── Supplier ──────────────────────────────────────────────────────────────────
