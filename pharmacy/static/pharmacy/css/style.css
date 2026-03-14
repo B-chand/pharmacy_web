@@ -463,6 +463,27 @@ h1, h2, h3, h4, h5 {
 }
 .form-control::placeholder { color: var(--muted); }
 
+/* Helper text styling - small hints under form fields */
+.form-helper-text {
+  display: block;
+  font-size: .75rem;
+  color: var(--muted);
+  margin-top: 0.35rem;
+  font-weight: 400;
+}
+
+/* Slight improvement: Add border-bottom accent to form controls on hover */
+.form-control:hover {
+  border-color: rgba(13,148,136,.3);
+}
+
+/* Invalid feedback styling for form errors */
+.invalid-feedback {
+  font-size: .75rem;
+  color: var(--rose);
+  margin-top: 0.35rem;
+}
+
 /* ── Alerts / Messages ───────────────────────────────────────── */
 .alert {
   border: none;
@@ -529,6 +550,39 @@ h1, h2, h3, h4, h5 {
 .login-sub { color: var(--muted); font-size: .875rem; margin-bottom: 2rem; }
 .login-form { width: 100%; }
 
+/* Enhanced login button with improved hover state and spacing */
+.btn-login-submit {
+  font-size: 1rem;
+  padding: 0.75rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.btn-login-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15,31,61,.15);
+}
+.btn-login-submit:active {
+  transform: translateY(0);
+}
+
+/* Register page form styling */
+.register-form { width: 100%; }
+
+/* Enhanced register button with improved hover state */
+.btn-create-submit {
+  font-size: 1rem;
+  padding: 0.75rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.btn-create-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(13,148,136,.2);
+}
+.btn-create-submit:active {
+  transform: translateY(0);
+}
+
 /* ── Responsive ──────────────────────────────────────────────── */
 @media (min-width: 992px) {
   .login-left { display: flex; }
@@ -551,6 +605,10 @@ h1, h2, h3, h4, h5 {
 @media (max-width: 576px) {
   .stat-cards { grid-template-columns: 1fr; }
   .top-header { padding: 0 1rem; }
+  /* Improve form spacing on mobile devices */
+  .login-right { padding: 2rem 1.5rem; }
+  .btn-login-submit, .btn-create-submit { padding: 0.675rem; }
+  .form-label { font-size: 0.78rem; }
 }
 
 /* ── Sidebar overlay ─────────────────────────────────────────── */
@@ -611,3 +669,35 @@ h1, h2, h3, h4, h5 {
   transition: opacity .15s;
 }
 [data-tooltip]:hover::after { opacity: 1; }
+
+/* ═══════════════════════════════════════════════════════════════
+   STYLING IMPROVEMENTS & DOCUMENTATION
+   
+   Recent enhancements focused on improving UX without breaking layout:
+   
+   1. FORM HELPER TEXT (.form-helper-text)
+      - Small descriptive hints displayed below form labels
+      - Subtle gray color (#64748b) with reduced font size
+      - Improves user guidance during form completion
+   
+   2. FORM CONTROLS HOVER STATE
+      - Subtle border color change on hover for visual feedback
+      - Maintains focus state with teal accent color
+      - Transitions are smooth (0.18s) for better UX
+   
+   3. BUTTON ENHANCEMENTS
+      - Added smooth hover animations with slight upward transform
+      - Subtle shadow appears on hover for depth perception
+      - Active state (click) returns button to normal position
+      - Applied to .btn-login-submit and .btn-create-submit
+   
+   4. RESPONSIVE IMPROVEMENTS
+      - Mobile devices (< 576px) receive adjusted padding
+      - Form labels are slightly smaller on mobile for better spacing
+      - Login form maintains good UX on all screen sizes
+   
+   5. ERROR FEEDBACK
+      - .invalid-feedback styling for form validation messages
+      - Uses rose color (#e11d48) for error visibility
+      - Properly spaced below input fields
+═══════════════════════════════════════════════════════════════ */
