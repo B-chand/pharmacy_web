@@ -7,12 +7,28 @@
 {% endblock %}
 
 {% block content %}
-<!-- Search -->
-<form method="GET" class="mb-3 d-flex gap-2" style="max-width:360px;">
-  <input type="text" name="q" value="{{ q }}" class="form-control" placeholder="Search suppliers…">
-  <button class="btn btn-primary btn-sm"><i class="bi bi-search"></i></button>
-  {% if q %}<a href="{% url 'supplier_list' %}" class="btn btn-outline-secondary btn-sm"><i class="bi bi-x"></i></a>{% endif %}
-</form>
+
+<!-- Supplier Search Section -->
+<!-- Provides search functionality for suppliers by name or email -->
+<div class="card mb-3">
+  <div class="card-body" style="padding:1rem 1.25rem;">
+    <form method="GET" class="d-flex gap-2" style="max-width:400px;">
+      <div class="flex-grow-1">
+        <label class="form-label">Search Suppliers</label>
+        <input type="text" name="q" value="{{ q }}" class="form-control" placeholder="Search by name or email…">
+      </div>
+      <div class="d-flex align-items-end gap-2">
+        <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-search"></i> Search</button>
+        {% if q %}
+        <a href="{% url 'supplier_list' %}" class="btn btn-outline-secondary btn-sm"><i class="bi bi-x-lg"></i> Clear</a>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Supplier List Table Section -->
+<!-- Displays suppliers in a sortable, paginated table -->
 
 <div class="table-wrapper">
   <div class="card-header">
@@ -20,11 +36,24 @@
   </div>
   {% if suppliers %}
   <div class="table-responsive">
-    <table class="table">
-      <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Medicines</th><th>Since</th><th style="text-align:right;">Actions</th></tr></thead>
-      <tbody>
-        {% for s in suppliers %}
+    <table class="table table-striped" id="supplier-table">
+      <thead>
         <tr>
+          <th data-sort="name">Name <i class="bi bi-chevron-expand sort-icon"></i></th>
+          <th data-sort="phone">Phone <i class="bi bi-chevron-expand sort-icon"></i></th>
+          <th data-sort="email">Email <i class="bi bi-chevron-expand sort-icon"></i></th>
+          <th data-sort="medicines">Medicines <i class="bi bi-chevron-expand sort-icon"></i></th>
+          <th data-sort="since">Since <i class="bi bi-chevron-expand sort-icon"></i></th>
+          <th style="text-align:right;">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="supplier-tbody">
+        {% for s in suppliers %}
+        <tr data-name="{{ s.name|lower }}"
+            data-phone="{{ s.phone|default:''|lower }}"
+            data-email="{{ s.email|default:''|lower }}"
+            data-medicines="{{ s.med_count }}"
+            data-since="{{ s.created|date:'Y-m-d' }}">
           <td class="fw-500">{{ s.name }}</td>
           <td style="color:var(--slate);">{{ s.phone|default:"—" }}</td>
           <td style="color:var(--slate);">{{ s.email|default:"—" }}</td>
@@ -40,6 +69,27 @@
         {% endfor %}
       </tbody>
     </table>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="card-footer d-flex justify-content-between align-items-center" id="supplier-pagination-controls" style="display: none;">
+    <div>
+      <small class="text-muted">Showing <span id="supplier-showing-start">1</span> to <span id="supplier-showing-end">{{ suppliers.count }}</span> of {{ suppliers.count }} entries</small>
+    </div>
+    <nav aria-label="Supplier table pagination">
+      <ul class="pagination pagination-sm mb-0">
+        <li class="page-item" id="supplier-prev-page">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item" id="supplier-next-page">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
   {% else %}
   <div class="empty-state">
