@@ -203,14 +203,53 @@ Important UI screens are included in the `ui/` folder and shown below.
 
 ## 🖼️ Frontend Showcase
 
-| Stage | Preview |
-|---|---|
-| 🚀 Sign In Page | ![Sign In Page](ui/signin_page.png) |
-| 🚀 Dashboard | ![Dashboard](ui/dashboard.png) |
-| 🚀 Medicines | ![Medicines](ui/medicine.png) |
-| 🚀 Suppliers | ![Suppliers](ui/supplier.png) |
-| 🚀 Sales | ![Sales](ui/sales.png) |
-| 🚀 Contact | ![Contact](ui/contact.png) |
+### Sign In Page
+
+<p>
+	<a href="https://raw.githubusercontent.com/B-chand/pharmacy_web/main/ui/signin_page.png">
+		<img src="https://raw.githubusercontent.com/B-chand/pharmacy_web/main/ui/signin_page.png" alt="Sign In Page" width="900">
+	</a>
+</p>
+
+### Dashboard
+
+<p>
+	<a href="https://raw.githubusercontent.com/B-chand/pharmacy_web/main/ui/dashboard.png">
+		<img src="https://raw.githubusercontent.com/B-chand/pharmacy_web/main/ui/dashboard.png" alt="Dashboard" width="900">
+	</a>
+</p>
+
+### Medicines
+
+<p>
+	<a href="https://raw.githubusercontent.com/B-chand/pharmacy_web/main/ui/medicine.png">
+		<img src="https://raw.githubusercontent.com/B-chand/pharmacy_web/main/ui/medicine.png" alt="Medicines" width="900">
+	</a>
+</p>
+
+### Suppliers
+
+<p>
+	<a href="https://raw.githubusercontent.com/B-chand/pharmacy_web/main/ui/supplier.png">
+		<img src="https://raw.githubusercontent.com/B-chand/pharmacy_web/main/ui/supplier.png" alt="Suppliers" width="900">
+	</a>
+</p>
+
+### Sales
+
+<p>
+	<a href="https://raw.githubusercontent.com/B-chand/pharmacy_web/main/ui/sales.png">
+		<img src="https://raw.githubusercontent.com/B-chand/pharmacy_web/main/ui/sales.png" alt="Sales" width="900">
+	</a>
+</p>
+
+### Contact
+
+<p>
+	<a href="https://raw.githubusercontent.com/B-chand/pharmacy_web/main/ui/contact.png">
+		<img src="https://raw.githubusercontent.com/B-chand/pharmacy_web/main/ui/contact.png" alt="Contact" width="900">
+	</a>
+</p>
 
 ---
 
