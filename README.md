@@ -64,7 +64,8 @@ The application reduces manual record-keeping and improves operational accuracy 
 ### Backend
 - Django 5
 - Python 3
-- PostgreSQL
+- SQLite (default local setup)
+- PostgreSQL (optional / production-ready)
 - Django ORM
 
 ### Frontend
@@ -85,9 +86,10 @@ The application reduces manual record-keeping and improves operational accuracy 
 Before running the project, install:
 
 - Python 3.10+
-- PostgreSQL
 - Git
 - pip (Python package manager)
+
+PostgreSQL is optional for local testing. A fresh clone can run with SQLite by default.
 
 ---
 
@@ -121,7 +123,11 @@ pip install -r requirements.txt
 ```
 
 ### 5) Configure environment variables
-Create `.env` file in project root:
+This step is optional for local evaluation.
+
+If you want to use PostgreSQL, copy `.env.example` to `.env` and set your values:
+
+Use the port your PostgreSQL server is actually running on. If your local setup uses port `5000`, keep `DB_PORT=5000`.
 
 ```env
 SECRET_KEY=your_secret_key
@@ -134,8 +140,12 @@ DB_HOST=localhost
 DB_PORT=5000
 ```
 
+If you skip `.env`, Django will use SQLite automatically and create `db.sqlite3` on first migration.
+
 ### 6) Create PostgreSQL database
-Create a database named `pharmaflow_db`.
+Only needed if you are using PostgreSQL.
+
+Create a database named `medicinedbfile`, or update `DB_NAME` in `.env` to match your database.
 
 ### 7) Run migrations
 ```bash

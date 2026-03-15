@@ -50,6 +50,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pharmaflow.wsgi.application'
 
 DATABASE_URL = config('DATABASE_URL', default=None)
+DB_NAME = config('DB_NAME', default=None)
+DB_USER = config('DB_USER', default=None)
+DB_PASSWORD = config('DB_PASSWORD', default=None)
+DB_HOST = config('DB_HOST', default=None)
+DB_PORT = config('DB_PORT', default=None)
 
 if DATABASE_URL:
     DATABASES = {
@@ -59,15 +64,22 @@ if DATABASE_URL:
             ssl_require=True,
         )
     }
+elif any([DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT]):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': DB_NAME or 'medicinedbfile',
+            'USER': DB_USER or 'postgres',
+            'PASSWORD': DB_PASSWORD or 'postgres',
+            'HOST': DB_HOST or 'localhost',
+            'PORT': DB_PORT or '5432',
+        }
+    }
 else:
     DATABASES = {
         'default': {
-            'ENGINE':   'django.db.backends.postgresql',
-            'NAME':     config('DB_NAME',     default='medicinedbfile'),
-            'USER':     config('DB_USER',     default='postgres'),
-            'PASSWORD': config('DB_PASSWORD', default='postgres'),
-            'HOST':     config('DB_HOST',     default='localhost'),
-            'PORT':     config('DB_PORT',     default='5000'),
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 
