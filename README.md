@@ -1,278 +1,259 @@
-# 💊 PharmaFlow — Pharmacy Management System
+# 💊 PharmaFlow - Pharmacy Management System
 
-A minimal, modern Django 5 + PostgreSQL pharmacy management system with a polished Bootstrap 5 frontend.
+A complete pharmacy inventory and transaction management web application built with Django and PostgreSQL.
+
+---
+
+## 🧭 Project Map
+
+- [🌟 Overview](#-overview)
+- [🎯 Problem & Solution](#-problem--solution)
+- [4.1 Project Description](#41-project-description)
+- [4.2 Technology Stack](#42-technology-stack)
+- [📋 Prerequisites](#-prerequisites)
+- [4.3 Installation Instructions](#43-installation-instructions)
+- [4.4 Features Implemented](#44-features-implemented)
+- [5. Project Manual](#5-project-manual)
+- [🖼️ Frontend Showcase](#️-frontend-showcase)
+- [📁 Project Structure](#-project-structure)
+
+---
+
+## 🌟 Overview
+
+PharmaFlow is designed to manage daily pharmacy operations from one dashboard. It supports medicine inventory tracking, supplier/customer management, purchase and sales transactions, and contact message handling.
+
+The project focuses on practical business flow: update stock through purchases and sales, monitor low/expired medicines, and keep records organized with easy CRUD operations.
+
+---
+
+## 🎯 Problem & Solution
+
+| Challenge | Solution in PharmaFlow |
+|---|---|
+| Manual medicine and stock tracking | Centralized medicine inventory with automatic stock updates |
+| Difficulty monitoring expired/low stock items | Dashboard alerts and status indicators for inventory health |
+| Scattered supplier and customer records | Dedicated supplier and customer management modules |
+| Error-prone sales/purchase records | Validated forms with save/edit/delete flows and stock-safe logic |
+
+---
+
+## 4.1 Project Description
+
+### Overview of the application
+PharmaFlow is a Django-based pharmacy management system that enables authenticated users to manage medicines, suppliers, customers, purchases, and sales through a clean web interface.
+
+### Problem being solved
+The application reduces manual record-keeping and improves operational accuracy by digitizing core pharmacy workflows such as stock-in, stock-out, and record maintenance.
+
+### Key features
+- User authentication (register, login, logout)
+- Protected routes for authenticated users
+- Dashboard with KPI cards and recent activity
+- Medicine CRUD operations
+- Supplier CRUD operations
+- Customer CRUD operations
+- Purchase CRUD operations (with stock increase)
+- Sale CRUD operations (with stock decrease and validation)
+- Contact submission form saved to database
+
+---
+
+## 4.2 Technology Stack
+
+### Backend
+- Django 5
+- Python 3
+- PostgreSQL
+- Django ORM
+
+### Frontend
+- Django Templates
+- HTML5
+- CSS3
+- JavaScript
+- Bootstrap 5 + Bootstrap Icons
+
+### Deployment/Serving
+- Gunicorn
+- WhiteNoise
+
+---
+
+## 📋 Prerequisites
+
+Before running the project, install:
+
+- Python 3.10+
+- PostgreSQL
+- Git
+- pip (Python package manager)
+
+---
+
+## 4.3 Installation Instructions
+
+### 1) Clone repository
+```bash
+git clone https://github.com/B-chand/pharmacy_web.git
+cd pharmacy_web
+```
+
+### 2) Create virtual environment
+```bash
+python -m venv venv
+```
+
+### 3) Activate virtual environment
+Windows:
+```bash
+venv\Scripts\activate
+```
+
+macOS/Linux:
+```bash
+source venv/bin/activate
+```
+
+### 4) Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 5) Configure environment variables
+Create `.env` file in project root:
+
+```env
+SECRET_KEY=your_secret_key
+DEBUG=True
+
+DB_NAME=medicinedbfile
+DB_USER=postgres
+DB_PASSWORD=your_password
+DB_HOST=localhost
+DB_PORT=5000
+```
+
+### 6) Create PostgreSQL database
+Create a database named `pharmaflow_db`.
+
+### 7) Run migrations
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+### 8) (Optional) Create superuser
+```bash
+python manage.py createsuperuser
+```
+
+### 9) (Optional) Seed initial data
+```bash
+python manage.py seed
+```
+
+### 10) Start development server
+```bash
+python manage.py runserver
+```
+
+Open: `http://127.0.0.1:8000/`
+
+---
+
+## 4.4 Features Implemented
+
+- Authentication: register, login, logout
+- Route protection with `login_required`
+- Dashboard with total counts and activity overview
+- Medicines: add, list, detail, edit, delete
+- Suppliers: add, list, edit, delete
+- Customers: add, list, edit, delete
+- Purchases: add, list, edit, delete
+- Sales: add, list, edit, delete
+- Auto stock adjustment on purchase/sale create/edit/delete
+- Sales validation against available stock
+- Search and filtering in management pages
+- Contact page with database persistence
+- Django admin integration
+
+---
+
+## 5. Project Manual
+
+### Step-by-step explanation of system flow
+
+1. User opens the login page and signs in.
+2. System verifies credentials and redirects to Dashboard.
+3. Dashboard displays inventory and transaction summary.
+4. User manages medicines (create/read/update/delete).
+5. User manages suppliers and customers.
+6. User records purchases; medicine stock is automatically increased.
+7. User records sales; medicine stock is automatically decreased.
+8. User edits/deletes purchases or sales; stock is recalculated safely.
+9. User submits contact form; message is stored in database.
+10. Admin can review and manage all entities via Django admin panel.
+
+### Screenshots of important pages
+
+Important UI screens are included in the `ui/` folder and shown below.
+
+---
+
+## 🖼️ Frontend Showcase
+
+| Stage | Preview |
+|---|---|
+| 🚀 Sign In Page | ![Sign In Page](ui/signin_page.png) |
+| 🚀 Dashboard | ![Dashboard](ui/dashboard.png) |
+| 🚀 Medicines | ![Medicines](ui/medicine.png) |
+| 🚀 Suppliers | ![Suppliers](ui/supplier.png) |
+| 🚀 Sales | ![Sales](ui/sales.png) |
+| 🚀 Contact | ![Contact](ui/contact.png) |
 
 ---
 
 ## 📁 Project Structure
 
-```
-pharmaflow/                          ← Project root
+```text
+pharmacy_web/
 ├── manage.py
 ├── requirements.txt
-├── .env.example                     ← Copy to .env and fill in your values
-│
-├── pharmaflow/                      ← Django project package
+├── README.md
+├── .env.example
+├── ui/
+│   ├── signin_page.png
+│   ├── dashboard.png
+│   ├── medicine.png
+│   ├── supplier.png
+│   ├── sales.png
+│   └── contact.png
+├── pharmaflow/
 │   ├── __init__.py
-│   ├── settings.py                  ← All config (reads from .env)
-│   ├── urls.py                      ← Root URL routing
+│   ├── settings.py
+│   ├── urls.py
 │   └── wsgi.py
-│
-└── pharmacy/                        ← Main application
-    ├── __init__.py
-    ├── apps.py
-    ├── models.py                    ← All 6 models
-    ├── views.py                     ← All views + business logic
-    ├── forms.py                     ← ModelForms with Bootstrap widgets
-    ├── admin.py                     ← Admin panel configuration
-    ├── urls.py                      ← App URL patterns
-    ├── migrations/
-    │   └── __init__.py
-    ├── management/
-    │   └── commands/
-    │       └── seed.py              ← Example data seeder
-    ├── static/
-    │   └── pharmacy/
-    │       ├── css/style.css        ← Full design system
-    │       └── js/main.js           ← Sidebar, alerts, auto-price
-    └── templates/
-        └── pharmacy/
-            ├── base.html            ← Master layout (sidebar + header)
-            ├── login.html           ← Auth page
-            ├── home.html            ← Dashboard
-            ├── medicine_list.html
-            ├── medicine_detail.html
-            ├── medicine_form.html
-            ├── supplier_list.html
-            ├── supplier_form.html
-            ├── customer_list.html
-            ├── customer_form.html
-            ├── purchase_list.html
-            ├── purchase_form.html
-            ├── sale_list.html
-            ├── sale_form.html
-            ├── contact.html
-            └── confirm_delete.html
+└── pharmacy/
+	├── __init__.py
+	├── admin.py
+	├── apps.py
+	├── forms.py
+	├── models.py
+	├── urls.py
+	├── views.py
+	├── migrations/
+	├── management/
+	│   └── commands/
+	│       └── seed.py
+	├── static/
+	│   └── pharmacy/
+	│       ├── css/
+	│       └── js/
+	└── templates/
+		└── pharmacy/
 ```
 
 ---
 
-## 🗄️ Step 1 — Create PostgreSQL Database
 
-Open **pgAdmin 4** and run or create:
-
-```sql
-CREATE DATABASE pharmaflow_db;
-```
-
-Or via pgAdmin UI:
-1. Right-click **Databases → Create → Database**
-2. Name: `pharmaflow_db`
-3. Owner: `postgres`
-4. Click Save
-
----
-
-## 🐍 Step 2 — Python Virtual Environment
-
-```bash
-# Navigate to project root
-cd pharmaflow
-
-# Create virtual environment
-python -m venv venv
-
-# Activate it:
-# Windows:
-venv\Scripts\activate
-# macOS/Linux:
-source venv/bin/activate
-```
-
----
-
-## 📦 Step 3 — Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-**requirements.txt includes:**
-- `Django>=5.0` — Web framework
-- `psycopg2-binary` — PostgreSQL driver
-- `python-decouple` — .env file management
-
----
-
-## ⚙️ Step 4 — Configure Environment
-
-```bash
-# Copy the example env file
-cp .env.example .env
-```
-
-Edit `.env`:
-```env
-SECRET_KEY=your-random-secret-key-here
-DEBUG=True
-
-DB_NAME=pharmaflow_db
-DB_USER=postgres
-DB_PASSWORD=your_postgres_password
-DB_HOST=localhost
-DB_PORT=5432
-```
-
-> **Tip:** Generate a secret key with:
-> `python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"`
-
----
-
-## 🗃️ Step 5 — Run Migrations
-
-```bash
-# Create migration files from models
-python manage.py makemigrations
-
-# Apply migrations to PostgreSQL
-python manage.py migrate
-```
-
-This creates tables for:
-- `pharmacy_medicine`
-- `pharmacy_supplier`
-- `pharmacy_customer`
-- `pharmacy_purchase`
-- `pharmacy_sale`
-- `pharmacy_contactsubmission`
-
----
-
-## 👤 Step 6 — Create Superuser
-
-```bash
-python manage.py createsuperuser
-```
-
-Enter username, email, and password when prompted.
-
----
-
-## 🌱 Step 7 — Seed Example Data (Optional)
-
-```bash
-python manage.py seed
-```
-
-This adds:
-- 4 suppliers (MedLine Global, PharmaDirect, etc.)
-- 12 medicines (including expired, low-stock, and out-of-stock examples)
-- 6 customers
-
----
-
-## 🚀 Step 8 — Run the Server
-
-```bash
-python manage.py runserver
-```
-
-Open: **http://127.0.0.1:8000**
-
-You'll be redirected to the login page. Use your superuser credentials.
-
----
-
-## 🌐 URL Reference
-
-| URL | Page |
-|-----|------|
-| `/` | Dashboard |
-| `/login/` | Login |
-| `/logout/` | Logout |
-| `/medicines/` | Medicine list (with search & filter) |
-| `/medicines/add/` | Add medicine |
-| `/medicines/<id>/` | Medicine detail |
-| `/medicines/<id>/edit/` | Edit medicine |
-| `/medicines/<id>/delete/` | Delete medicine |
-| `/suppliers/` | Supplier list |
-| `/suppliers/add/` | Add supplier |
-| `/customers/` | Customer list |
-| `/customers/add/` | Add customer |
-| `/purchases/` | Purchase list |
-| `/purchases/add/` | Record purchase (stock in) |
-| `/sales/` | Sales list |
-| `/sales/add/` | Record sale (stock out) |
-| `/contact/` | Contact form |
-| `/admin/` | Django admin panel |
-
----
-
-## 🔄 Data Flow
-
-```
-User fills HTML form (Django Template)
-       ↓
-POST request sent to Django View
-       ↓
-ModelForm validates data (forms.py)
-       ↓
-Business logic checked (stock availability, etc.)
-       ↓
-Django ORM executes SQL via psycopg2
-       ↓
-PostgreSQL saves data (pharmaflow_db on port 5432)
-       ↓
-model.save() triggers stock update (Purchase/Sale)
-       ↓
-Redirect + Django messages flash success/error
-       ↓
-Template renders updated state to user
-```
-
-### Stock Logic
-- **Purchase saved** → `medicine.stock += quantity` (atomic, via model.save override)
-- **Sale saved** → `medicine.stock -= quantity` (blocked if insufficient)
-- **Purchase deleted** → stock is reversed
-- **Sale deleted** → stock is restored
-
----
-
-## ✅ Feature Checklist
-
-- [x] Login / logout authentication
-- [x] Dashboard with KPI cards + alert panels
-- [x] Medicine CRUD with category + expiry + stock tracking
-- [x] Supplier CRUD
-- [x] Customer CRUD
-- [x] Purchase management (auto stock increase)
-- [x] Sales management (auto stock decrease + validation)
-- [x] Contact form saved to database
-- [x] Admin panel for all models
-- [x] Search & filter on medicine list
-- [x] Expired medicines highlighted (red rows)
-- [x] Low stock / out of stock badges
-- [x] Auto price calculation on purchase/sale forms
-- [x] Responsive sidebar layout (mobile-friendly)
-- [x] Confirmation page before delete
-- [x] Django messages for success/error feedback
-- [x] Seed command for example data
-
----
-
-## 🛠️ Troubleshooting
-
-**`FATAL: password authentication failed`**
-→ Check `DB_PASSWORD` in your `.env` matches your PostgreSQL password
-
-**`No module named 'psycopg2'`**
-→ Run `pip install psycopg2-binary` inside your activated venv
-
-**`No such table` errors**
-→ Run `python manage.py migrate`
-
-**Static files not loading**
-→ In development, Django serves them automatically. Make sure `DEBUG=True`
-
-**Port 8000 already in use**
-→ `python manage.py runserver 8080`
