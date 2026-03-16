@@ -206,7 +206,7 @@ Open: `http://127.0.0.1:8000/`
 9. User submits contact form; message is stored in database.
 10. Admin can review and manage all entities via Django admin panel.
 
-## 5. Team Members
+## 6. Team Members
 
 | Name | Student ID | Branch | Responsibility |
 |---|---|---|---|
