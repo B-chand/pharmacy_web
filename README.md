@@ -14,6 +14,7 @@ A complete pharmacy inventory and transaction management web application built w
 - [4.3 Installation Instructions](#43-installation-instructions)
 - [4.4 Features Implemented](#44-features-implemented)
 - [5. Project Manual](#5-project-manual)
+- [5. Team Members](#5-team-members)
 - [🖼️ Frontend Showcase](#️-frontend-showcase)
 - [📁 Project Structure](#-project-structure)
 
@@ -204,6 +205,15 @@ Open: `http://127.0.0.1:8000/`
 8. User edits/deletes purchases or sales; stock is recalculated safely.
 9. User submits contact form; message is stored in database.
 10. Admin can review and manage all entities via Django admin panel.
+
+## 5. Team Members
+
+| Name | Student ID | Branch | Responsibility |
+|---|---|---|---|
+| Bibek Chand | 05 | main, docs/setup | Project lead; coordinated module integration, managed environment setup, ensured deployment readiness, and prepared final project documentation. |
+| Ayush Thapa Magar | 04 | feature/medicine-supplier | Developed medicine and supplier management features, including CRUD operations, listing improvements, and search/filter functionality. |
+| Deepesh Gauro Tharu | 08 | feature/auth-ui | Designed and implemented authentication UI (login and registration pages), improving layout consistency and user interaction. |
+| Lukesh Oli | 20 | feature/auth-improvements | Improved authentication module structure, enhanced code readability, and assisted with validation testing and authentication flow stability. |
 
 ### Screenshots of important pages
 
